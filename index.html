@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Sin(x) 그래프</title>
@@ -20,17 +20,25 @@
     <canvas id="canvas"></canvas>
 
     <script>
-        var canvas = document.getElementById("canvas");
-        var ctx = canvas.getContext("2d");
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        const x = new Array(200);
+        const y = new Array(200);
+
+        for (let i = 0; i < x.length; i++) {
+            x[i] = i * 0.01;
+            y[i] = Math.sin(x[i]);
+        }
 
         ctx.beginPath();
-        for (var i = 0; i < x.length; i++) {
+        for (let i = 0; i < x.length; i++) {
             ctx.lineTo(x[i] * 100, y[i] * 100 + 200);
         }
         ctx.stroke();
 
         ctx.beginPath();
-        for (var i = 0; i < x.length; i++) {
+        for (let i = 0; i < x.length; i++) {
             ctx.arc(x[i] * 100, y[i] * 100 + 200, 2, 0, 2 * Math.PI);
         }
         ctx.fillStyle = "red";
