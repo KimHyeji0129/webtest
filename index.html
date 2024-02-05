@@ -36,8 +36,15 @@
            	    curveType: 'function',
            	    legend: { position: 'bottom' },
 	           	hAxis: {
-			format: '0.0\u03c0',
-	                tickFormat: '0.0'
+	           		format: '0.0\u03c0',
+	           		ticks: [
+	           	        {v: 0, f: '0.0'},
+	           	        {v: 1.5, f: '0.5'},
+	           	        {v: 3, f: '1'},
+	           	        {v: 4.5, f: '1.5'},
+	           	        {v: 6, f: '2'}
+	           	      ]
+	                
 	            }
            	};
             var chart = new google.visualization.LineChart(document.getElementById('chart'));
@@ -47,7 +54,5 @@
 </head>
 <body>
     <div id="chart"></div>
-</body>
-</html>
 </body>
 </html>
