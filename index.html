@@ -1,55 +1,54 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <html lang="ko">
 <head>
     
-    <meta charset="UTF-8"><title>Sin(x) graph</title>
+    <meta charset="UTF-8"><title>위상에 따른 Sin 함수의 실효값</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
         
-		var arrsin = [
-			['x', 'sin(x)'],
-			//[0, 0],
-	        //[0.01, Math.sin(0.01)],
-	        //[0.02, Math.sin(0.02)],
-	        //[1.98, Math.sin(1.98)],
-	        //[1.99, Math.sin(1.99)],
-	        //[2, 0]
-			];
-		//x를 0으로 시작해서 0.1씩 증가해서 0.5까지
-		//y는 x의 곱하기 10.
-		//for (var i = 0; i <= 5; i++) {
-            //for (var j = 0; j <= 10; j++) {
-                //arrsin.push([i * 0.1, j * 0.1 * 10]);
-            //}
-        //}
-		for (var i = 0; i <= 200; i++) {
-            arrsin.push([i * 0.01 * Math.PI, Math.sin(i * 0.01 * Math.PI)]);
+		var arrsin = [['x', 'sin(x)']];
+		
+		for (var i = 0; i <= 360; i++) {
+			arrsin.push([i * (2/360) * Math.PI, Math.sin(i * (2/360) * Math.PI)]);
         }
-			
+		
+		var tickhAxis = [];
+		  
+		  for (var j = 0; j <= 2; j += 0.25) {
+		    tickhAxis.push({
+		      v: j * Math.PI,
+		      f: j.toString() + "\u03c0"
+		    });
+		  }
+		
         function drawChart() {        	
             var data = google.visualization.arrayToDataTable(arrsin);
-
+            			
             var options = {
-           	    title: 'Sin(x) chart',
+           	    title: '위상에 따른 Sin 함수의 실효값',
            	    curveType: 'function',
            	    legend: { position: 'bottom' },
 	           	hAxis: {
-	           		format: '0.0\u03c0',
-	           		ticks: [
-	           	        {v: 0, f: '0.0\u03c0'},
-	           	        {v: 1.517, f: '0.5\u03c0'},
-	           	        {v: 3.142, f: '1\u03c0'},
-	           	        {v: 4.712, f: '1.5\u03c0'},
-	           	        {v: 6.283, f: '2\u03c0'}
-	           	      ]
-	                
-	            }
+	           		ticks: tickhAxis
+	            },
+	            vAxis: {
+                    viewWindow: {
+                        min: -1.5,
+                        max: 1.5
+                    }
+                },
+	            width: 1000,
+	            height: 400,
+           	 	
            	};
+			
             var chart = new google.visualization.LineChart(document.getElementById('chart'));
             chart.draw(data, options);
         }
+        
     </script>
 </head>
 <body>
